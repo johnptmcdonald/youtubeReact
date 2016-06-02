@@ -1,26 +1,21 @@
-# ReduxSimpleStarter
-
-Interested in learning [Redux](https://www.udemy.com/react-redux/)?
+# youtubeReact
 
 ###Getting Started###
 
-There are two methods for getting started with this repo.
+This is a youtube client built in React.
 
-####Familiar with Git?#####
-Checkout this repo, install depdencies, then start the gulp process with the following:
-
-```
-	> git clone git@github.com:StephenGrider/ReduxSimpleStarter.git
-	> cd ReduxSimpleStarter
-	> npm install
-	> npm start
-```
-
-####Not Familiar with Git?#####
-Click [here](https://github.com/StephenGrider/ReactStarter/releases) then download the .zip file.  Extract the contents of the zip file, then open your terminal, change to the project directory, and:
+Checkout this repo, install dependencies, then start the gulp process with the following:
 
 ```
 	> npm install
 	> npm start
 ```
-# youtubeReact
+
+The application expects a youtube API key in config/youTube.js, in the form: 
+```
+let youTube = {
+	API_KEY: 'your_youtube_api_key_here'
+}
+
+export default youTube
+```

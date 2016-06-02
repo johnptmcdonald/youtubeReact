@@ -1,15 +1,64 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import youTube from '../config/youTube'
+import YTSearch from 'youtube-api-search'
+import _ from 'lodash'
 
-import App from './components/app';
-import reducers from './reducers';
+import { SearchBar } from './components/SearchBar'
+import { VideoList } from './components/VideoList'
+import { VideoDetail } from './components/VideoDetail'
+const API_KEY = youTube.API_KEY
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+class App extends Component {
+	constructor(props){
+		super(props)
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
+		this.state = {
+			videos: [],
+			selectedVideo: null
+		}
+
+		this.videoSearch('surfboards')
+	}
+
+	handleVideoSelect(video){
+		this.setState({selectedVideo: video})
+	}
+
+	// this should be throttled
+	handleSearchTermChange(term){
+		this.videoSearch(term)
+	}
+
+	videoSearch(term){
+		YTSearch({key: API_KEY, term: term}, (videos)=>{
+			this.setState({
+				videos: videos,
+				selectedVideo: videos[0]
+			})
+		})		
+	}
+
+
+
+	render(){
+		const handleSearchTermChange= _.debounce((term)=>{this.handleSearchTermChange(term)}, 500)
+		return (
+			<div>
+				<SearchBar onSearchTermChange={handleSearchTermChange.bind(this)}/>
+				<VideoDetail video={this.state.selectedVideo}/>
+				<VideoList 
+					videos={this.state.videos}
+					onVideoSelect={this.handleVideoSelect.bind(this)}
+				/>
+			</div>
+		)		
+	}
+
+}
+
+
+ReactDOM.render(<App />, document.querySelector('.container'))
+
+
+

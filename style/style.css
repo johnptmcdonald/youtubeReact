@@ -1,0 +1,36 @@
+* {
+	box-sizing: border-box;
+}
+
+.search-bar {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+}
+
+.search-bar input {
+	width: 100%;
+}
+
+.video-item img {
+	max-width: 64px;
+}
+
+.video-detail .details {
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 0 0 4px 4px;
+	margin-bottom: 10px
+}
+
+.embed-responsive {
+	background-color: black
+}
+
+.list-group-item {
+	cursor: pointer;
+}
+
+.list-group-item:hover {
+	background-color: #eee
+}
